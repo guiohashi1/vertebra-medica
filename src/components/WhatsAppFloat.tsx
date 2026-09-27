@@ -1,16 +1,31 @@
-import { brand, whatsappUrl } from '../config'
+import { useEffect, useState } from 'react'
+import { whatsappUrl } from '../config'
 
 export function WhatsAppFloat() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const target = document.querySelector('.hero__actions')
+    if (!target) return
+    const observer = new IntersectionObserver(([entry]) => {
+      setVisible(!entry?.isIntersecting && (entry?.boundingClientRect.top ?? 0) < 0)
+    })
+    observer.observe(target)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <a
-      className="wa-float"
-      href={whatsappUrl()}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Falar com a ${brand.name} no WhatsApp`}
-    >
-      <span className="wa-float__dot" aria-hidden="true" />
-      WhatsApp
-    </a>
+    <div className={`wa-bar${visible ? ' is-visible' : ''}`}>
+      <a
+        className="wa-bar__link"
+        href={whatsappUrl()}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={visible ? undefined : -1}
+        aria-hidden={visible ? undefined : true}
+      >
+        Pedir orçamento no WhatsApp
+      </a>
+    </div>
   )
 }

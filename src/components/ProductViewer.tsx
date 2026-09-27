@@ -25,6 +25,8 @@ type ProductViewerProps = {
   hint?: string
   shadowY?: number
   productId?: ProductId
+  /** Mudar a chave refaz a sombra de contato (ex.: ao trocar de modelo). */
+  shadowKey?: string
 }
 
 function SceneControls({
@@ -61,6 +63,7 @@ export function ProductViewer({
   hint = 'Arraste para girar',
   shadowY = -0.7,
   productId = 'eletrica',
+  shadowKey,
 }: ProductViewerProps) {
   const webgl = useWebGL()
   const mode = usePerf()
@@ -134,12 +137,13 @@ export function ProductViewer({
             {children}
             {!lite ? (
               <ContactShadows
+                key={shadowKey}
                 position={[0, shadowY, 0]}
-                opacity={0.28}
+                opacity={0.3}
                 scale={10}
-                blur={2.2}
+                blur={2.4}
                 far={4}
-                frames={1}
+                frames={80}
               />
             ) : null}
             <SceneControls autoRotate={allowRotate} target={target} />

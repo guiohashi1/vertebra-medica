@@ -44,7 +44,7 @@ export function ProductModel({ id, position, height = 1.4 }: ProductModelProps) 
 
   if (model.kind === 'procedural' && model.procedural === 'mattress') {
     return (
-      <group position={position}>
+      <group position={position ?? [0, -0.28, 0]} scale={height * 0.9}>
         <MattressModel animated={false} />
       </group>
     )
@@ -60,3 +60,4 @@ export function ProductModel({ id, position, height = 1.4 }: ProductModelProps) 
 }
 
 useGLTF.preload('/models/cama-eletrica.glb')
+useGLTF.preload('/models/cama-manual.glb')

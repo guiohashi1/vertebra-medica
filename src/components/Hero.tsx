@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
-import { brand } from '../config'
-import { usePerf } from './PerfProvider'
+import { brand, heroPhoto, products, whatsappUrl } from '../config'
+import { PhotoSlot } from './PhotoSlot'
 import { ProductFallback } from './ProductFallback'
 
 const HeroStage3D = lazy(() =>
@@ -8,41 +8,61 @@ const HeroStage3D = lazy(() =>
 )
 
 export function Hero() {
-  const mode = usePerf()
-
   return (
     <section className="hero" id="topo">
-      <div className="hero__stage" aria-hidden="true">
-        {mode === 'static' ? (
-          <ProductFallback id="eletrica" />
-        ) : (
-          <Suspense fallback={<ProductFallback id="eletrica" />}>
-            <HeroStage3D />
-          </Suspense>
-        )}
-      </div>
-      <div className="hero__veil" />
-
-      <div className="hero__content">
-        <p className="hero__eyebrow reveal is-in">{brand.region}</p>
-        <h1 className="hero__brand reveal is-in reveal-delay-1">
-          Vertebra <em>Médica</em>
-        </h1>
-        <p className="hero__lead reveal is-in reveal-delay-2">
-          Camas e colchões hospitalares com foco em durabilidade e conforto.
-          Orçamento pelo WhatsApp.
-        </p>
-        <div className="hero__actions reveal is-in reveal-delay-3">
-          <a className="btn btn--primary" href="#orcamento">
-            Montar orçamento
-          </a>
-          <a className="btn btn--ghost" href="#catalogo">
-            Ver modelos
-          </a>
+      <div className="hero__layout shell">
+        <div className="hero__content">
+          <p className="hero__eyebrow intro intro--1">{brand.name}</p>
+          <h1 className="hero__brand">
+            <span className="hero__line intro intro--2">Camas hospitalares</span>
+            <span className="hero__line intro intro--3">
+              <em>e colchões</em>
+            </span>
+          </h1>
+          <p className="hero__lead intro intro--4">
+            Oferecemos soluções em <a href="#modelo-eletrica">camas elétricas</a>,{' '}
+            <a href="#modelo-manual">manuais</a> e{' '}
+            <a href="#modelo-colchao">colchões</a>. Faça sua cotação de forma
+            rápida e prática falando com a nossa equipe pelo WhatsApp.
+          </p>
+          <div className="hero__actions intro intro--5">
+            <a
+              className="btn btn--primary btn--lg"
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pedir orçamento no WhatsApp
+            </a>
+            <a className="btn btn--ghost btn--lg" href="#catalogo">
+              Ver modelos e detalhes
+            </a>
+          </div>
         </div>
-      </div>
 
-      <p className="hero__scroll">Role para ver</p>
+        <figure className="hero__stage intro intro--stage">
+          <div className="hero__floor" aria-hidden="true" />
+          {heroPhoto ? (
+            <PhotoSlot
+              photo={heroPhoto}
+              label="Foto principal do produto"
+              priority
+            />
+          ) : (
+            <>
+              <Suspense fallback={<ProductFallback id="eletrica" />}>
+                <HeroStage3D />
+              </Suspense>
+              <figcaption className="stage-caption">
+                <span className="stage-caption__name">{products[0]?.name}</span>
+                <span className="stage-caption__note">
+                  Modelo 3D ilustrativo. Arraste para girar.
+                </span>
+              </figcaption>
+            </>
+          )}
+        </figure>
+      </div>
     </section>
   )
 }

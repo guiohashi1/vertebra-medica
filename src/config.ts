@@ -1,13 +1,30 @@
-/** Altere o número para o WhatsApp comercial da empresa (somente dígitos, com DDI). */
-export const WHATSAPP_PHONE = '5511999999999'
+/**
+ * Dados comerciais da Vertebra Médica.
+ * Telefone: somente dígitos, com DDI 55. Exibição fica em WHATSAPP_DISPLAY.
+ */
+export const WHATSAPP_PHONE = '5519991119773'
+export const WHATSAPP_DISPLAY = '(19) 99111-9773'
 
 export const brand = {
   name: 'Vertebra Médica',
   short: 'Vertebra',
-  region: 'Orçamento e montagem sob consulta',
 }
 
 export type ProductId = 'eletrica' | 'manual' | 'colchao'
+
+/**
+ * Foto real do hero. Coloque o arquivo em public/ e preencha src + alt.
+ * null = ainda não há foto do produto (não publicar como se fosse foto real).
+ */
+export const heroPhoto: { src: string; alt: string } | null = null
+
+/**
+ * Fotos reais por produto. Sem arquivo, a ficha mostra um espaço pendente.
+ * Exemplo: eletrica: { src: '/produtos/cama-eletrica.jpg', alt: 'Cama hospitalar elétrica Vertebra, vista lateral' }
+ */
+export const productPhotos: Partial<
+  Record<ProductId, { src: string; alt: string }>
+> = {}
 
 export const products: {
   id: ProductId
@@ -19,105 +36,56 @@ export const products: {
   {
     id: 'eletrica',
     name: 'Cama hospitalar elétrica',
-    tag: 'Ajuste no controle',
+    tag: 'Acionamento elétrico',
     description:
-      'Altura, dorso e pernas no controle. Menos esforço para reposicionar o paciente no dia a dia.',
-    points: [
-      'Controle simples de operar',
-      'Grade lateral para segurança',
-      'Rodízios com trava',
-    ],
+      'Cama hospitalar com acionamento elétrico. Medidas, acessórios e condições são informados no orçamento.',
+    points: [],
   },
   {
     id: 'manual',
     name: 'Cama hospitalar manual',
-    tag: 'Simples e resistente',
+    tag: 'Acionamento manual',
     description:
-      'Manivela firme, pouca manutenção. Leito articulado sem complicar o uso contínuo.',
-    points: [
-      'Acionamento por manivela',
-      'Leito articulado',
-      'Fácil de higienizar',
-    ],
+      'Cama hospitalar com acionamento manual. Medidas, acessórios e condições são informados no orçamento.',
+    points: [],
   },
   {
     id: 'colchao',
     name: 'Colchão hospitalar',
-    tag: 'Suporte e higiene',
+    tag: 'Colchão',
     description:
-      'Densidade pensada para longas horas de repouso. Capa impermeável, fácil de limpar. Combina com as camas da linha.',
-    points: [
-      'Espuma de alta densidade',
-      'Capa impermeável e lavável',
-      'Serve em leitos articulares',
-    ],
+      'Colchão hospitalar para uso com as camas da linha. Medidas e condições são informados no orçamento.',
+    points: [],
   },
 ]
 
-export const trustItems = [
-  {
-    title: 'Orçamento direto',
-    text: 'Você fala com a gente no WhatsApp. Sem loja no meio.',
-  },
-  {
-    title: 'Durabilidade',
-    text: 'Estrutura pensada para uso contínuo, não só para a primeira impressão.',
-  },
-  {
-    title: 'Linha completa',
-    text: 'Elétrica, manual e colchão. Dá para orçar o conjunto.',
-  },
+/**
+ * Preencha somente com informação confirmada. Campos vazios não aparecem na página.
+ */
+export const companyFacts: { label: string; text: string }[] = [
+  // { label: 'Região atendida', text: '' },
+  // { label: 'Entrega e montagem', text: '' },
+  // { label: 'Garantia e suporte', text: '' },
+  // { label: 'Dados empresariais', text: '' },
 ]
 
-export const audiences = [
-  {
-    id: 'conforto',
-    title: 'Conforto no leito',
-    text: 'Apoio e estabilidade para quem permanece deitado por longos períodos.',
-    waHint: 'foco em conforto no leito',
-  },
-  {
-    id: 'cuidado',
-    title: 'Praticidade no cuidado',
-    text: 'Ajustes e movimentação pensados para quem opera a cama no dia a dia.',
-    waHint: 'foco em praticidade no cuidado',
-  },
-  {
-    id: 'conjunto',
-    title: 'Cama e colchão',
-    text: 'Monte a proposta com o modelo certo e o colchão compatível.',
-    waHint: 'conjunto cama e colchão',
-  },
-]
+/** Perguntas e respostas aprovadas. Lista vazia oculta a seção. */
+export const faq: { question: string; answer: string }[] = []
 
+/** Comparação limitada ao que o catálogo já define: o tipo de acionamento. */
 export const comparison = {
-  title: 'Elétrica ou manual?',
-  lead: 'Duas opções. A escolha depende da rotina de ajuste e da preferência de operação.',
+  title: 'Elétrica ou manual',
+  lead: 'Nesta página, a diferença registrada entre as duas camas é o acionamento.',
   rows: [
     {
       label: 'Acionamento',
-      eletrica: 'Controle elétrico',
-      manual: 'Manivela',
-    },
-    {
-      label: 'Esforço na operação',
-      eletrica: 'Menor',
-      manual: 'Maior na manivela',
-    },
-    {
-      label: 'Manutenção',
-      eletrica: 'Baixa a média',
-      manual: 'Bem baixa',
-    },
-    {
-      label: 'Melhor quando',
-      eletrica: 'Muitos ajustes de posição',
-      manual: 'Uso simples e orçamento enxuto',
+      eletrica: 'Elétrico',
+      manual: 'Manual',
     },
   ],
 }
 
-/** Modelos 3D de teste (CC Attribution). Troque pelos .glb oficiais quando tiver. */
+/** Modelos 3D temporários (CC Attribution). Troque pelos arquivos oficiais quando existirem. */
 export const productModels: Record<
   ProductId,
   {
@@ -147,26 +115,60 @@ export const modelCredits = [
   },
 ]
 
+export const BRAZIL_UFS = [
+  'AC',
+  'AL',
+  'AM',
+  'AP',
+  'BA',
+  'CE',
+  'DF',
+  'ES',
+  'GO',
+  'MA',
+  'MG',
+  'MS',
+  'MT',
+  'PA',
+  'PB',
+  'PE',
+  'PI',
+  'PR',
+  'RJ',
+  'RN',
+  'RO',
+  'RR',
+  'RS',
+  'SC',
+  'SE',
+  'SP',
+  'TO',
+] as const
+
 export type QuotePayload = {
   product?: string
   quantity?: string
   city?: string
-  audience?: string
+  uf?: string
 }
 
 export function whatsappUrl(payload?: string | QuotePayload) {
-  let text = 'Olá, gostaria de um orçamento de cama e colchão hospitalares.'
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappText(payload))}`
+}
+
+export function whatsappText(payload?: string | QuotePayload) {
+  let text = 'Olá. Quero solicitar um orçamento de cama hospitalar ou colchão.'
 
   if (typeof payload === 'string') {
-    text = `Olá, gostaria de um orçamento da ${payload}.`
+    text = `Olá. Quero solicitar um orçamento.\n\nProduto: ${payload}`
   } else if (payload) {
-    const lines = ['Olá, gostaria de um orçamento.']
-    if (payload.product) lines.push(`Modelo: ${payload.product}`)
+    const lines = ['Olá. Quero solicitar um orçamento.', '']
+    if (payload.product) lines.push(`Produto: ${payload.product}`)
     if (payload.quantity) lines.push(`Quantidade: ${payload.quantity}`)
-    if (payload.city) lines.push(`Cidade: ${payload.city}`)
-    if (payload.audience) lines.push(`Interesse: ${payload.audience}`)
+    const place = [payload.city, payload.uf].filter(Boolean).join('/')
+    if (place) lines.push(`Cidade/UF: ${place}`)
     text = lines.join('\n')
   }
 
-  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`
+  return text
 }

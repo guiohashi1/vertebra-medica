@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { brand, heroPhoto, products, whatsappUrl } from '../config'
+import { heroPhoto, products, whatsappUrl } from '../config'
 import { PhotoSlot } from './PhotoSlot'
 import { ProductFallback } from './ProductFallback'
 
@@ -12,7 +12,6 @@ export function Hero() {
     <section className="hero" id="topo">
       <div className="hero__layout shell">
         <div className="hero__content">
-          <p className="hero__eyebrow intro intro--1">{brand.name}</p>
           <h1 className="hero__brand">
             <span className="hero__line intro intro--2">Camas hospitalares</span>
             <span className="hero__line intro intro--3">

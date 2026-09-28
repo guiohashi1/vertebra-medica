@@ -10,13 +10,10 @@ export function Compare() {
       <div className="shell">
         <Reveal>
           <div className="section-head">
-            <p className="kicker">
-              <span className="kicker__num">02</span> Comparativo
-            </p>
-            <h2 id="compare-title" className="section-title">
+            <p className="kicker">Comparativo</p>
+            <h2 id="compare-title" className="sr-only">
               {comparison.title}
             </h2>
-            <p className="section-head__lead">{comparison.lead}</p>
           </div>
         </Reveal>
 

@@ -38,9 +38,6 @@ export function QuoteForm() {
       <div className="cta__layout shell">
         <div className="cta__intro">
           <Reveal>
-            <p className="kicker kicker--light">
-              <span className="kicker__num">04</span> Orçamento
-            </p>
             <h2 className="cta__title">Solicitar orçamento</h2>
           </Reveal>
           <Reveal delay={1}>
@@ -102,7 +99,7 @@ export function QuoteForm() {
                   className="quote__input"
                   type="text"
                   name="city"
-                  placeholder="Ex.: Campinas"
+                  placeholder="Ex.: Recife"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   autoComplete="address-level2"

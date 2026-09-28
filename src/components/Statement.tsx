@@ -43,7 +43,7 @@ export function Statement() {
   return (
     <section className="statement" aria-label="O catálogo">
       <div className="statement__inner">
-        <p className="kicker kicker--center">Três itens</p>
+        <p className="kicker kicker--center">Sob consulta</p>
         <p className="statement__text" ref={textRef}>
           {text.split(' ').map((word, index) => (
             <span

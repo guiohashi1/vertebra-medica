@@ -75,9 +75,6 @@ export function Catalog() {
         <Reveal>
           <div className="catalog__head">
             <div>
-              <p className="kicker">
-                <span className="kicker__num">01</span> Catálogo
-              </p>
               <h2 className="section-title">Escolha o modelo</h2>
             </div>
             <p className="catalog__count">Três modelos. Orçamento sob consulta.</p>
@@ -96,9 +93,7 @@ export function Catalog() {
                     <CatalogViewer id={active} />
                   </Suspense>
                   <figcaption className="stage-caption">
-                    <span className="stage-caption__name">
-                      {String(activeIndex + 1).padStart(2, '0')} · {activeProduct.name}
-                    </span>
+                    <span className="stage-caption__name">{activeProduct.name}</span>
                     <span className="stage-caption__note">Modelo 3D ilustrativo</span>
                   </figcaption>
                 </>
@@ -126,16 +121,13 @@ export function Catalog() {
                     onClick={() => setActive(product.id)}
                     onKeyDown={(event) => onTabKey(event, index)}
                   >
-                    <span className="tab__num">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
                     <span className="tab__name">{product.name}</span>
                   </button>
                 )
               })}
             </div>
 
-            {products.map((product, index) => (
+            {products.map((product) => (
               <div
                 key={product.id}
                 role="tabpanel"
@@ -144,9 +136,6 @@ export function Catalog() {
                 className="panel"
                 hidden={product.id !== active}
               >
-                <p className="panel__index">
-                  {String(index + 1).padStart(2, '0')} de 03 · {product.tag}
-                </p>
                 <h3 className="panel__name">{product.name}</h3>
                 <p className="panel__desc">{product.description}</p>
                 {product.points.length > 0 ? (

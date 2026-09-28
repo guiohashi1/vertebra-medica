@@ -1,11 +1,5 @@
 import { useEffect, useId, useState } from 'react'
-import { whatsappUrl } from '../config'
-
-const links = [
-  { href: '#catalogo', label: 'Modelos' },
-  { href: '#comparativo', label: 'Elétrica ou manual' },
-  { href: '#orcamento', label: 'Orçamento' },
-]
+import { pageLinks, whatsappUrl } from '../config'
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -54,7 +48,7 @@ export function Nav() {
           className={`nav__actions${open ? ' is-open' : ''}`}
           aria-label="Principal"
         >
-          {links.map((link) => (
+          {pageLinks.map((link) => (
             <a key={link.href} className="nav__text" href={link.href} onClick={close}>
               {link.label}
             </a>

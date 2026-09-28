@@ -10,6 +10,12 @@ export const brand = {
   short: 'Vertebra',
 }
 
+export const pageLinks = [
+  { href: '#catalogo', label: 'Modelos' },
+  { href: '#comparativo', label: 'Elétrica ou manual' },
+  { href: '#orcamento', label: 'Orçamento' },
+] as const
+
 export type ProductId = 'eletrica' | 'manual' | 'colchao'
 
 /**
@@ -75,7 +81,6 @@ export const faq: { question: string; answer: string }[] = []
 /** Diferença entre as camas: como a posição é ajustada. Sem medida, preço ou garantia. */
 export const comparison = {
   title: 'Elétrica ou manual',
-  lead: 'As duas são camas hospitalares. A diferença está na forma de acionamento.',
   rows: [
     {
       label: 'Acionamento',

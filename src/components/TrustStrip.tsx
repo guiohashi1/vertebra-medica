@@ -21,9 +21,6 @@ export function TrustStrip() {
     <section className="facts" id="informacoes" aria-labelledby="facts-title">
       <div className="shell facts__layout">
         <Reveal className="facts__intro">
-          <p className="kicker">
-            <span className="kicker__num">03</span> Informações
-          </p>
           <h2 id="facts-title" className="section-title">
             Informações
           </h2>

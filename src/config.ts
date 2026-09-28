@@ -72,15 +72,30 @@ export const companyFacts: { label: string; text: string }[] = [
 /** Perguntas e respostas aprovadas. Lista vazia oculta a seção. */
 export const faq: { question: string; answer: string }[] = []
 
-/** Comparação limitada ao que o catálogo já define: o tipo de acionamento. */
+/** Diferença entre as camas: como a posição é ajustada. Sem medida, preço ou garantia. */
 export const comparison = {
   title: 'Elétrica ou manual',
-  lead: 'Nesta página, a diferença registrada entre as duas camas é o acionamento.',
+  lead: 'As duas são camas hospitalares. A diferença está na forma de acionamento.',
   rows: [
     {
       label: 'Acionamento',
-      eletrica: 'Elétrico',
-      manual: 'Manual',
+      eletrica: 'Ajuste pelo controle.',
+      manual: 'Ajuste pela manivela.',
+    },
+    {
+      label: 'Movimento',
+      eletrica: 'Executado pelo motor.',
+      manual: 'Executado pela manivela.',
+    },
+    {
+      label: 'Esforço físico',
+      eletrica: 'O ajuste dispensa esforço físico.',
+      manual: 'O ajuste exige esforço na manivela.',
+    },
+    {
+      label: 'Alimentação',
+      eletrica: 'O ajuste requer energia elétrica.',
+      manual: 'O ajuste dispensa alimentação elétrica.',
     },
   ],
 }

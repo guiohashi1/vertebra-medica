@@ -1,10 +1,8 @@
 import { Reveal } from './Reveal'
 import { comparison, products, whatsappUrl } from '../config'
 
-const columns = [
-  { key: 'eletrica', title: 'Elétrica' },
-  { key: 'manual', title: 'Manual' },
-] as const
+const eletrica = products.find((product) => product.id === 'eletrica')
+const manual = products.find((product) => product.id === 'manual')
 
 export function Compare() {
   return (
@@ -24,35 +22,55 @@ export function Compare() {
 
         <Reveal delay={1}>
           <div className="versus">
-            {columns.map((column, index) => {
-              const product = products.find((p) => p.id === column.key)
-              return (
-                <article className="versus__col" key={column.key}>
-                  <p className="versus__label">
-                    {index === 0 ? 'A' : 'B'} · Cama hospitalar
-                  </p>
-                  <h3 className="versus__title">{column.title}</h3>
-                  <dl className="versus__rows">
-                    {comparison.rows.map((row) => (
-                      <div key={row.label} className="versus__row">
-                        <dt>{row.label}</dt>
-                        <dd>{row[column.key]}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                  {product ? (
-                    <a
-                      className="text-link"
-                      href={whatsappUrl(product.name)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Pedir orçamento da cama {column.title.toLowerCase()}
-                    </a>
-                  ) : null}
-                </article>
-              )
-            })}
+            <div className="versus__head">
+              <div className="versus__corner" aria-hidden="true" />
+              <h3 className="versus__title">Elétrica</h3>
+              <h3 className="versus__title versus__manual">Manual</h3>
+            </div>
+
+            <dl className="versus__rows">
+              {comparison.rows.map((row) => (
+                <div className="versus__row" key={row.label}>
+                  <dt className="versus__name">{row.label}</dt>
+                  <dd className="versus__cell">
+                    <span className="sr-only">Elétrica. </span>
+                    {row.eletrica}
+                  </dd>
+                  <dd className="versus__cell versus__manual">
+                    <span className="sr-only">Manual. </span>
+                    {row.manual}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="versus__links">
+              <div className="versus__corner" aria-hidden="true" />
+              <div className="versus__link">
+                {eletrica ? (
+                  <a
+                    className="text-link"
+                    href={whatsappUrl(eletrica.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Pedir orçamento da cama elétrica
+                  </a>
+                ) : null}
+              </div>
+              <div className="versus__link versus__manual">
+                {manual ? (
+                  <a
+                    className="text-link"
+                    href={whatsappUrl(manual.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Pedir orçamento da cama manual
+                  </a>
+                ) : null}
+              </div>
+            </div>
           </div>
         </Reveal>
 

@@ -8,9 +8,11 @@ export function Footer() {
       <div className="shell footer__main">
         <div>
           <a href="#topo" className="footer__brand">
-            Vertebra <span>Médica</span>
+            Oficina das <span>{brand.accent}</span>
           </a>
-          <p className="footer__line">Camas hospitalares e colchões.</p>
+          <p className="footer__line">
+            Camas hospitalares, colchões e equipamentos de apoio.
+          </p>
         </div>
 
         <nav className="footer__nav" aria-label="Rodapé">

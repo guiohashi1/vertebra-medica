@@ -1,20 +1,9 @@
-import {
-  lazy,
-  Suspense,
-  useEffect,
-  useRef,
-  useState,
-  type KeyboardEvent,
-} from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { productPhotos, products, whatsappUrl, type ProductId } from '../config'
+import { PhotoCarousel } from './PhotoCarousel'
 import { PhotoSlot } from './PhotoSlot'
-import { ProductFallback } from './ProductFallback'
 import { Reveal } from './Reveal'
 import { scrollToId } from '../scrollTo'
-
-const CatalogViewer = lazy(() =>
-  import('./CatalogViewer').then((m) => ({ default: m.CatalogViewer })),
-)
 
 const HASH_PREFIX = '#modelo-'
 
@@ -67,7 +56,8 @@ export function Catalog() {
 
   const activeIndex = products.findIndex((p) => p.id === active)
   const activeProduct = products[activeIndex]!
-  const photo = productPhotos[active]
+  const photos = productPhotos[active] ?? []
+  const hasPhotos = photos.length > 0
 
   return (
     <section className="catalog" id="catalogo" ref={sectionRef}>
@@ -77,26 +67,23 @@ export function Catalog() {
             <div>
               <h2 className="section-title">Escolha o modelo</h2>
             </div>
-            <p className="catalog__count">Três modelos. Orçamento sob consulta.</p>
+            <p className="catalog__count">
+              {products.length} modelos. Orçamento sob consulta.
+            </p>
           </div>
         </Reveal>
 
         <div className="showroom">
           <Reveal className="showroom__stage-wrap">
-            <figure className="showroom__stage">
-              <div className="hero__floor" aria-hidden="true" />
-              {photo ? (
-                <PhotoSlot photo={photo} label={activeProduct.name} />
+            <figure className="showroom__stage has-photo">
+              {hasPhotos ? (
+                <PhotoCarousel
+                  key={active}
+                  photos={photos}
+                  label={activeProduct.name}
+                />
               ) : (
-                <>
-                  <Suspense fallback={<ProductFallback id={active} />}>
-                    <CatalogViewer id={active} />
-                  </Suspense>
-                  <figcaption className="stage-caption">
-                    <span className="stage-caption__name">{activeProduct.name}</span>
-                    <span className="stage-caption__note">Modelo 3D ilustrativo</span>
-                  </figcaption>
-                </>
+                <PhotoSlot photo={null} label={activeProduct.name} />
               )}
             </figure>
           </Reveal>

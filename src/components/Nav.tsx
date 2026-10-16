@@ -1,5 +1,5 @@
 import { useEffect, useId, useState } from 'react'
-import { pageLinks, whatsappUrl } from '../config'
+import { brand, pageLinks, whatsappUrl } from '../config'
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -30,7 +30,7 @@ export function Nav() {
     <header className={`nav${scrolled ? ' is-scrolled' : ''}`}>
       <div className="shell nav__inner">
         <a href="#topo" className="nav__brand" onClick={close}>
-          Vertebra <span>Médica</span>
+          Oficina das <span>{brand.accent}</span>
         </a>
 
         <button

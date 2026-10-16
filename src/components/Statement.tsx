@@ -6,9 +6,9 @@ import { usePerf } from './PerfProvider'
 gsap.registerPlugin(ScrollTrigger)
 
 const text =
-  'Cama hospitalar elétrica, cama hospitalar manual e colchão. Cada pedido segue por orçamento, sem compra direta neste site.'
+  'Mais do que leitos hospitalares, entregamos noites seguras, dores aliviadas e a certeza de que seu ente querido está nas melhores mãos.'
 
-const highlight = new Set(['elétrica,', 'manual', 'colchão.', 'orçamento,'])
+const highlight = new Set(['seguras,', 'aliviadas', 'mãos.'])
 
 export function Statement() {
   const mode = usePerf()
@@ -16,34 +16,42 @@ export function Statement() {
 
   useEffect(() => {
     const el = textRef.current
-    if (!el || mode !== 'full') return
+    // Só desliga em static / reduced-motion. Em lite o reveal continua.
+    if (!el || mode === 'static') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
+    const words = el.querySelectorAll('.word')
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el.querySelectorAll('.word'),
-        { opacity: 0.16 },
-        {
-          opacity: 1,
-          stagger: 0.08,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 80%',
-            end: 'bottom 50%',
-            scrub: true,
-          },
+      gsap.set(words, { opacity: 0.18 })
+      gsap.to(words, {
+        opacity: 1,
+        duration: 0.7,
+        ease: 'power1.out',
+        stagger: 0.035,
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 78%',
+          toggleActions: 'play none none none',
+          invalidateOnRefresh: true,
         },
-      )
+      })
     }, el)
 
-    return () => ctx.revert()
+    const refresh = () => ScrollTrigger.refresh()
+    const frame = requestAnimationFrame(refresh)
+    window.addEventListener('load', refresh)
+
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('load', refresh)
+      ctx.revert()
+    }
   }, [mode])
 
   return (
     <section className="statement" aria-label="O catálogo">
       <div className="statement__inner">
-        <p className="kicker kicker--center">Sob consulta</p>
+        <p className="kicker kicker--center">Para quem cuida</p>
         <p className="statement__text" ref={textRef}>
           {text.split(' ').map((word, index) => (
             <span

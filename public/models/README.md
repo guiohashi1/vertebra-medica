@@ -8,4 +8,4 @@ Arquivos temporários para visualização no site. Licença: **CC Attribution**.
 | `cama-manual.glb` | Catálogo (manual) | chenchanchong / GetGLB |
 | `cama-prop.glb` | Reserva (não usado ainda) | chenchanchong / GetGLB |
 
-Quando tiver os `.glb` oficiais da Vertebra, substitua estes arquivos mantendo os nomes (ou atualize `src/config.ts`).
+Quando tiver os `.glb` oficiais da Oficina das Camas, substitua estes arquivos mantendo os nomes (ou atualize `src/config.ts`). Com fotos reais no catálogo, estes modelos 3D podem sair.

@@ -1,6 +1,6 @@
-# Vertebra Médica
+# Oficina das Camas
 
-Landing page de catálogo para camas e colchões hospitalares, com visualização 3D e solicitação de orçamento pelo WhatsApp.
+Landing page de catálogo para camas e colchões hospitalares, com fotos do produto e solicitação de orçamento pelo WhatsApp.
 
 ## Stack
 

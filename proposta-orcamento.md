@@ -1,6 +1,6 @@
 # Proposta de orçamento
 
-Vertebra Médica
+Oficina das Camas
 27 de setembro de 2026
 
 Esta proposta cobre a publicação da página de orçamento e, no plano maior, o início do Google Ads. O anúncio da OLX continua como está. O valor da verba de anúncio é pago direto ao Google, separado do meu serviço.

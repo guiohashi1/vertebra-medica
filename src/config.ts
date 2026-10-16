@@ -1,13 +1,15 @@
 /**
- * Dados comerciais da Vertebra Médica.
+ * Dados comerciais da Oficina das Camas.
  * Telefone: somente dígitos, com DDI 55. Exibição fica em WHATSAPP_DISPLAY.
  */
-export const WHATSAPP_PHONE = '5519991119773'
-export const WHATSAPP_DISPLAY = '(19) 99111-9773'
+export const WHATSAPP_PHONE = '558196194261'
+export const WHATSAPP_DISPLAY = '(81) 9619-4261'
 
 export const brand = {
-  name: 'Vertebra Médica',
-  short: 'Vertebra',
+  name: 'Oficina das Camas',
+  short: 'Oficina',
+  /** Parte em itálico na marca (nav e rodapé). */
+  accent: 'Camas',
 }
 
 export const pageLinks = [
@@ -16,21 +18,116 @@ export const pageLinks = [
   { href: '#orcamento', label: 'Orçamento' },
 ] as const
 
-export type ProductId = 'eletrica' | 'manual' | 'colchao'
+export type ProductId =
+  | 'eletrica'
+  | 'manual'
+  | 'colchao'
+  | 'poltrona'
+  | 'cadeira'
+
+export type ProductPhoto = {
+  src: string
+  alt: string
+}
 
 /**
- * Foto real do hero. Coloque o arquivo em public/ e preencha src + alt.
- * null = ainda não há foto do produto (não publicar como se fosse foto real).
+ * Destaque do hero: um ângulo limpo de cada cama.
+ * Lista vazia = modelo 3D ilustrativo.
  */
-export const heroPhoto: { src: string; alt: string } | null = null
+export const heroSlides: (ProductPhoto & { name: string; short: string })[] = [
+  {
+    src: '/produtos/eletrica/studio/01-hero.jpg',
+    alt: 'Cama hospitalar elétrica, vista geral',
+    name: 'Cama hospitalar elétrica',
+    short: 'Elétrica',
+  },
+  {
+    src: '/produtos/manual/studio/01-lateral.jpg',
+    alt: 'Cama hospitalar manual, vista lateral',
+    name: 'Cama hospitalar manual',
+    short: 'Manual',
+  },
+]
+
+/** Compatibilidade: primeira foto do hero, se existir. */
+export const heroPhoto: ProductPhoto | null = heroSlides[0] ?? null
 
 /**
- * Fotos reais por produto. Sem arquivo, a ficha mostra um espaço pendente.
- * Exemplo: eletrica: { src: '/produtos/cama-eletrica.jpg', alt: 'Cama hospitalar elétrica Vertebra, vista lateral' }
+ * Galeria por produto. Lista vazia ou ausente: catálogo mostra "Foto pendente".
+ * Versões anteriores ficam em public/produtos/.../studio-arquivo.
  */
-export const productPhotos: Partial<
-  Record<ProductId, { src: string; alt: string }>
-> = {}
+export const productPhotos: Partial<Record<ProductId, ProductPhoto[]>> = {
+  eletrica: [
+    {
+      src: '/produtos/eletrica/studio/01-hero.jpg',
+      alt: 'Cama hospitalar elétrica, vista geral',
+    },
+    {
+      src: '/produtos/eletrica/studio/02-estrado.jpg',
+      alt: 'Cama hospitalar elétrica, estrado e controle',
+    },
+    {
+      src: '/produtos/eletrica/studio/03-articulada.jpg',
+      alt: 'Cama hospitalar elétrica, posição articulada',
+    },
+    {
+      src: '/produtos/eletrica/studio/04-ambiente.jpg',
+      alt: 'Cama hospitalar elétrica em ambiente hospitalar, com grades e controle',
+    },
+  ],
+  manual: [
+    {
+      src: '/produtos/manual/studio/01-lateral.jpg',
+      alt: 'Cama hospitalar manual, vista lateral',
+    },
+    {
+      src: '/produtos/manual/studio/03-frontal.jpg',
+      alt: 'Cama hospitalar manual, vista frontal',
+    },
+    {
+      src: '/produtos/manual/studio/02-detalhe-grade.jpg',
+      alt: 'Cama hospitalar manual, detalhe das grades',
+    },
+    {
+      src: '/produtos/manual/studio/04-articulada.jpg',
+      alt: 'Cama hospitalar manual articulada, com manivelas e grades',
+    },
+  ],
+  colchao: [
+    {
+      src: '/produtos/colchao/studio/03-detalhe.png',
+      alt: 'Colchão hospitalar D33, detalhe da capa em napa',
+    },
+    {
+      src: '/produtos/colchao/studio/01-geral.jpg',
+      alt: 'Colchão hospitalar D33 com capa azul impermeável, vista geral',
+    },
+    {
+      src: '/produtos/colchao/studio/04-impermeavel.jpg',
+      alt: 'Colchão hospitalar D33, capa impermeável com zíper',
+    },
+  ],
+  poltrona: [
+    {
+      src: '/produtos/poltrona/studio/01-geral.jpg',
+      alt: 'Poltrona de acompanhante reclinável, vista geral',
+    },
+    {
+      src: '/produtos/poltrona/studio/03-reclinada.jpg',
+      alt: 'Poltrona de acompanhante na posição reclinada',
+    },
+  ],
+  cadeira: [
+    {
+      src: '/produtos/cadeira/studio/01-geral.jpg',
+      alt: 'Cadeira de rodas básica, vista geral',
+    },
+    {
+      src: '/produtos/cadeira/studio/03-traseira.jpg',
+      alt: 'Cadeira de rodas básica, vista traseira',
+    },
+  ],
+}
 
 export const products: {
   id: ProductId
@@ -57,10 +154,26 @@ export const products: {
   },
   {
     id: 'colchao',
-    name: 'Colchão hospitalar',
-    tag: 'Colchão',
+    name: 'Colchão hospitalar D33',
+    tag: 'Densidade D33',
     description:
-      'Colchão hospitalar para uso com as camas da linha. Medidas e condições são informados no orçamento.',
+      'Colchão hospitalar em espuma densidade D33, para uso com as camas da linha. Medidas e condições são informados no orçamento.',
+    points: [],
+  },
+  {
+    id: 'poltrona',
+    name: 'Poltrona de acompanhante',
+    tag: 'Reclinável',
+    description:
+      'Poltrona reclinável para acompanhante. Medidas, cores e condições são informados no orçamento.',
+    points: [],
+  },
+  {
+    id: 'cadeira',
+    name: 'Cadeira de rodas básica',
+    tag: 'Manual',
+    description:
+      'Cadeira de rodas básica, de acionamento manual. Medidas e condições são informados no orçamento.',
     points: [],
   },
 ]
@@ -117,6 +230,8 @@ export const productModels: Record<
   eletrica: { kind: 'glb', path: '/models/cama-eletrica.glb' },
   manual: { kind: 'glb', path: '/models/cama-manual.glb' },
   colchao: { kind: 'procedural', procedural: 'mattress' },
+  poltrona: { kind: 'glb' },
+  cadeira: { kind: 'glb' },
 }
 
 export const modelCredits = [
@@ -177,7 +292,8 @@ export function whatsappUrl(payload?: string | QuotePayload) {
 }
 
 export function whatsappText(payload?: string | QuotePayload) {
-  let text = 'Olá. Quero solicitar um orçamento de cama hospitalar ou colchão.'
+  let text =
+    'Olá. Quero solicitar um orçamento de cama hospitalar, colchão ou outro equipamento.'
 
   if (typeof payload === 'string') {
     text = `Olá. Quero solicitar um orçamento.\n\nProduto: ${payload}`

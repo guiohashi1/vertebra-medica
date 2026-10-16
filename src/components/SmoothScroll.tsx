@@ -42,7 +42,9 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
       ctx.revert()
       gsap.ticker.remove(ticker)
       lenis.destroy()
-      ScrollTrigger.getAll().forEach((t) => t.kill())
+      // Não matar todos os ScrollTriggers: Statement e outros
+      // componentes possuem os deles e fazem o próprio cleanup.
+      ScrollTrigger.refresh()
     }
   }, [mode])
 

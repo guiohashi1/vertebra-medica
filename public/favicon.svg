@@ -1,4 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="2" fill="#171c22"/>
-  <path d="M8 22V10h3.2l4.8 7.6L20.8 10H24v12h-2.6v-7.2L16.8 22h-1.6L10.6 14.8V22H8z" fill="#e6e9ec"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Oficina das Camas">
+  <rect width="32" height="32" rx="2" fill="#2f5550"/>
+  <g
+    fill="none"
+    stroke="#eeeeea"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <!-- Cabeceira e rodapé -->
+    <path d="M7.5 9.5v12.5"/>
+    <path d="M24.5 14.5v7.5"/>
+    <!-- Colchão articulado + travesseiro -->
+    <path d="M9.2 11.2h2.4"/>
+    <path d="M7.5 14.2l5.2-3.4 5.6 0.2 2.4 2.6 3.8-1.6"/>
+    <!-- Estrado / base -->
+    <path d="M7.5 18.5h17"/>
+    <path d="M10.5 18.5v3.2"/>
+    <path d="M21.5 18.5v3.2"/>
+    <path d="M10.5 21.7h11"/>
+  </g>
+  <!-- Rodízios -->
+  <circle cx="10.5" cy="24.2" r="1.35" fill="none" stroke="#eeeeea" stroke-width="1.6"/>
+  <circle cx="21.5" cy="24.2" r="1.35" fill="none" stroke="#eeeeea" stroke-width="1.6"/>
 </svg>

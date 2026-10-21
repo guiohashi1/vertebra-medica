@@ -14,15 +14,15 @@ export function Hero() {
     <section className="hero" id="topo">
       <div className="hero__layout shell">
         <div className="hero__content">
-          <h1 className="hero__brand">
-            <span className="hero__line intro intro--2">Camas hospitalares</span>
-            <span className="hero__line intro intro--3">
-              <em>e colchões</em>
-            </span>
+          <h1 className="hero__brand hero__brand--compact intro intro--2">
+            Equipamentos para Home Care,
+            <br />
+            <em>Clínicas e Hospitais</em>
           </h1>
           <p className="hero__lead intro intro--4">
-            Camas elétricas e manuais, colchão, poltrona de acompanhante e
-            cadeira de rodas. Cotação rápida pelo WhatsApp.
+            Camas hospitalares manuais e elétricas, Cadeiras de Rodas, colchões
+            pneumáticos, cadeiras de transferência, etc. Cotação rápida pelo
+            WhatsApp.
           </p>
           <div className="hero__actions intro intro--5">
             <a
@@ -34,7 +34,7 @@ export function Hero() {
               Pedir orçamento no WhatsApp
             </a>
             <a className="btn btn--ghost btn--lg" href="#catalogo">
-              Ver modelos e detalhes
+              Ver modelos disponíveis
             </a>
           </div>
         </div>

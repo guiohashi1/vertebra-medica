@@ -21,8 +21,14 @@ export function Compare() {
           <div className="versus">
             <div className="versus__head">
               <div className="versus__corner" aria-hidden="true" />
-              <h3 className="versus__title">Elétrica</h3>
-              <h3 className="versus__title versus__manual">Manual</h3>
+              <h3 className="versus__title">
+                <span className="versus__title-kicker">Cama hospitalar</span>
+                Manual
+              </h3>
+              <h3 className="versus__title versus__manual">
+                <span className="versus__title-kicker">Cama hospitalar</span>
+                Elétrica
+              </h3>
             </div>
 
             <dl className="versus__rows">
@@ -30,12 +36,12 @@ export function Compare() {
                 <div className="versus__row" key={row.label}>
                   <dt className="versus__name">{row.label}</dt>
                   <dd className="versus__cell">
-                    <span className="sr-only">Elétrica. </span>
-                    {row.eletrica}
-                  </dd>
-                  <dd className="versus__cell versus__manual">
                     <span className="sr-only">Manual. </span>
                     {row.manual}
+                  </dd>
+                  <dd className="versus__cell versus__manual">
+                    <span className="sr-only">Elétrica. </span>
+                    {row.eletrica}
                   </dd>
                 </div>
               ))}
@@ -44,18 +50,6 @@ export function Compare() {
             <div className="versus__links">
               <div className="versus__corner" aria-hidden="true" />
               <div className="versus__link">
-                {eletrica ? (
-                  <a
-                    className="text-link"
-                    href={whatsappUrl(eletrica.name)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Pedir orçamento da cama elétrica
-                  </a>
-                ) : null}
-              </div>
-              <div className="versus__link versus__manual">
                 {manual ? (
                   <a
                     className="text-link"
@@ -64,6 +58,18 @@ export function Compare() {
                     rel="noopener noreferrer"
                   >
                     Pedir orçamento da cama manual
+                  </a>
+                ) : null}
+              </div>
+              <div className="versus__link versus__manual">
+                {eletrica ? (
+                  <a
+                    className="text-link"
+                    href={whatsappUrl(eletrica.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Pedir orçamento da cama elétrica
                   </a>
                 ) : null}
               </div>

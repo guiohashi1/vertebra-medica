@@ -63,10 +63,14 @@ export function HeroSlideshow() {
         ))}
       </div>
 
-      <div className="hero-slides__meta">
-        <p className="hero-slides__name">{current.name}</p>
-        {total > 1 ? (
-          <div className="hero-slides__switch" role="tablist" aria-label="Modelo em destaque">
+      {total > 1 ? (
+        <div className="hero-slides__meta">
+          <p className="hero-slides__name">{current.name}</p>
+          <div
+            className="hero-slides__switch"
+            role="tablist"
+            aria-label="Modelo em destaque"
+          >
             {heroSlides.map((slide, i) => (
               <button
                 key={slide.src}
@@ -80,8 +84,8 @@ export function HeroSlideshow() {
               </button>
             ))}
           </div>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </div>
   )
 }

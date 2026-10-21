@@ -11,7 +11,7 @@ export function Footer() {
             Oficina das <span>{brand.accent}</span>
           </a>
           <p className="footer__line">
-            Camas hospitalares, colchões e equipamentos de apoio.
+            Equipamentos para home care, clínicas e hospitais.
           </p>
         </div>
 

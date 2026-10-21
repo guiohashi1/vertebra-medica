@@ -24,6 +24,7 @@ export type ProductId =
   | 'colchao'
   | 'poltrona'
   | 'cadeira'
+  | 'transferencia'
 
 export type ProductPhoto = {
   src: string
@@ -31,21 +32,15 @@ export type ProductPhoto = {
 }
 
 /**
- * Destaque do hero: um ângulo limpo de cada cama.
+ * Destaque do hero: imagem fixa de ambiente (sem seletor de modelo).
  * Lista vazia = modelo 3D ilustrativo.
  */
 export const heroSlides: (ProductPhoto & { name: string; short: string })[] = [
   {
-    src: '/produtos/eletrica/studio/01-hero.jpg',
-    alt: 'Cama hospitalar elétrica, vista geral',
-    name: 'Cama hospitalar elétrica',
-    short: 'Elétrica',
-  },
-  {
-    src: '/produtos/manual/studio/01-lateral.jpg',
-    alt: 'Cama hospitalar manual, vista lateral',
-    name: 'Cama hospitalar manual',
-    short: 'Manual',
+    src: '/produtos/hero/enfermaria.jpg',
+    alt: 'Paciente e acompanhante em quarto com cama hospitalar',
+    name: 'Cuidado em home care e clínicas',
+    short: 'Ambiente',
   },
 ]
 
@@ -73,6 +68,10 @@ export const productPhotos: Partial<Record<ProductId, ProductPhoto[]>> = {
     {
       src: '/produtos/eletrica/studio/04-ambiente.jpg',
       alt: 'Cama hospitalar elétrica em ambiente hospitalar, com grades e controle',
+    },
+    {
+      src: '/produtos/eletrica/studio/05-movimentos.jpg',
+      alt: 'Diagrama dos movimentos da cama hospitalar elétrica',
     },
   ],
   manual: [
@@ -120,13 +119,14 @@ export const productPhotos: Partial<Record<ProductId, ProductPhoto[]>> = {
   cadeira: [
     {
       src: '/produtos/cadeira/studio/01-geral.jpg',
-      alt: 'Cadeira de rodas básica, vista geral',
+      alt: 'Cadeira de rodas padrão, vista geral',
     },
     {
       src: '/produtos/cadeira/studio/03-traseira.jpg',
-      alt: 'Cadeira de rodas básica, vista traseira',
+      alt: 'Cadeira de rodas padrão, vista traseira',
     },
   ],
+  // Fotos da cadeira de transferência: aguardando envio do cliente.
 }
 
 export const products: {
@@ -141,24 +141,31 @@ export const products: {
     name: 'Cama hospitalar elétrica',
     tag: 'Acionamento elétrico',
     description:
-      'Cama hospitalar com acionamento elétrico. Medidas, acessórios e condições são informados no orçamento.',
-    points: [],
+      'Cama hospitalar com os movimentos básicos de costas e pernas, elevação, cardíaca, trendelemburg e proclive.',
+    points: [
+      'Altura: sob consulta',
+      'Largura: sob consulta',
+      'Suporta até 120 kg',
+    ],
   },
   {
     id: 'manual',
     name: 'Cama hospitalar manual',
     tag: 'Acionamento manual',
     description:
-      'Cama hospitalar com acionamento manual. Medidas, acessórios e condições são informados no orçamento.',
-    points: [],
+      'Cama hospitalar com acionamento manual por manivelas. A altura da cama é fixa, faz os movimentos de costas e de pernas.',
+    points: [
+      'Altura: sob consulta',
+      'Largura: sob consulta',
+      'Suporta até 120 kg',
+    ],
   },
   {
     id: 'colchao',
     name: 'Colchão hospitalar D33',
     tag: 'Densidade D33',
-    description:
-      'Colchão hospitalar em espuma densidade D33, para uso com as camas da linha. Medidas e condições são informados no orçamento.',
-    points: [],
+    description: 'Colchão hospitalar em espuma de densidade D33.',
+    points: ['Largura: 90 cm', 'Comprimento: 1,90 m', 'Altura: 10 cm'],
   },
   {
     id: 'poltrona',
@@ -170,10 +177,25 @@ export const products: {
   },
   {
     id: 'cadeira',
-    name: 'Cadeira de rodas básica',
+    name: 'Cadeira de Rodas Padrão',
     tag: 'Manual',
+    description: 'Cadeira de rodas padrão para mobilidade.',
+    points: [
+      'Construída em aço carbono',
+      'Estrutura dobrável em X',
+      'Encosto e assento em nylon',
+      'Pneus maciços',
+      'Capacidade para 90 kg',
+      'Largura do assento 40 cm e largura total 64 cm',
+      'Marca: Jaguaribe',
+    ],
+  },
+  {
+    id: 'transferencia',
+    name: 'Cadeira de transferência',
+    tag: 'Transferência',
     description:
-      'Cadeira de rodas básica, de acionamento manual. Medidas e condições são informados no orçamento.',
+      'Cadeira de transferência. Medidas e condições são informados no orçamento.',
     points: [],
   },
 ]
@@ -182,38 +204,55 @@ export const products: {
  * Preencha somente com informação confirmada. Campos vazios não aparecem na página.
  */
 export const companyFacts: { label: string; text: string }[] = [
-  // { label: 'Região atendida', text: '' },
-  // { label: 'Entrega e montagem', text: '' },
-  // { label: 'Garantia e suporte', text: '' },
-  // { label: 'Dados empresariais', text: '' },
+  {
+    label: 'Região atendida',
+    text: 'Recife e região metropolitana. Outras localidades sob consulta.',
+  },
+  {
+    label: 'Entrega e montagem',
+    text: 'Equipe especializada para entrega, montagem, orientações e solução de problemas técnicos. Com a Oficina das Camas o suporte pós venda é garantido.',
+  },
+  {
+    label: 'Garantia e suporte',
+    text: 'Há mais de seis anos no mercado de equipamentos hospitalares para Clínicas, Hospitais e Home Care, a garantia e suporte aos clientes é uma de nossas metas principais. Entregamos equipamentos e garantimos a continuidade de seu funcionamento.',
+  },
+  {
+    label: 'Dados empresariais',
+    text: 'A Oficina das Camas é uma empresa do ramo de aluguel e venda de equipamentos hospitalares para aplicação em diversos ambientes: hospitais, clínicas e home care. Trabalhamos com equipamentos novos e recuperados, entregando sempre equipamentos de qualidade comprovada.',
+  },
 ]
 
 /** Perguntas e respostas aprovadas. Lista vazia oculta a seção. */
 export const faq: { question: string; answer: string }[] = []
 
-/** Diferença entre as camas: como a posição é ajustada. Sem medida, preço ou garantia. */
+/** Diferença entre as camas: como a posição é ajustada. Sem subtítulo "Característica". */
 export const comparison = {
   title: 'Elétrica ou manual',
   rows: [
     {
       label: 'Acionamento',
-      eletrica: 'Ajuste pelo controle.',
-      manual: 'Ajuste pela manivela.',
+      eletrica: 'Por controle remoto (botoneira) com botões de comando.',
+      manual: 'Por manivelas, que precisam ser giradas manualmente.',
     },
     {
-      label: 'Movimento',
-      eletrica: 'Executado pelo motor.',
-      manual: 'Executado pela manivela.',
+      label: 'Movimentos',
+      eletrica:
+        'Ajuste de encosto, pernas e altura de forma mais ampla, precisa e rápida.',
+      manual:
+        'Ajuste de altura do encosto e das pernas; em geral, mais limitados e feitos em etapas.',
     },
     {
       label: 'Esforço físico',
-      eletrica: 'O ajuste dispensa esforço físico.',
-      manual: 'O ajuste exige esforço na manivela.',
+      eletrica:
+        'Esforço mínimo: basta apertar um botão, o que facilita o trabalho do cuidador.',
+      manual:
+        'Exige força de quem cuida a cada ajuste, o que pode causar desgaste.',
     },
     {
-      label: 'Alimentação',
-      eletrica: 'O ajuste requer energia elétrica.',
-      manual: 'O ajuste dispensa alimentação elétrica.',
+      label: 'Alimentação elétrica',
+      eletrica:
+        'Funciona ligada à tomada (127V ou 220V, conforme o modelo); alguns modelos têm bateria de backup.',
+      manual: 'Não utiliza energia elétrica.',
     },
   ],
 }
@@ -232,6 +271,7 @@ export const productModels: Record<
   colchao: { kind: 'procedural', procedural: 'mattress' },
   poltrona: { kind: 'glb' },
   cadeira: { kind: 'glb' },
+  transferencia: { kind: 'glb' },
 }
 
 export const modelCredits = [
@@ -293,7 +333,7 @@ export function whatsappUrl(payload?: string | QuotePayload) {
 
 export function whatsappText(payload?: string | QuotePayload) {
   let text =
-    'Olá. Quero solicitar um orçamento de cama hospitalar, colchão ou outro equipamento.'
+    'Olá. Quero solicitar um orçamento de equipamentos hospitalares.'
 
   if (typeof payload === 'string') {
     text = `Olá. Quero solicitar um orçamento.\n\nProduto: ${payload}`

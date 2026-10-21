@@ -67,9 +67,6 @@ export function Catalog() {
             <div>
               <h2 className="section-title">Escolha o modelo</h2>
             </div>
-            <p className="catalog__count">
-              {products.length} modelos. Orçamento sob consulta.
-            </p>
           </div>
         </Reveal>
 
@@ -131,9 +128,9 @@ export function Catalog() {
                       <li key={point}>{point}</li>
                     ))}
                   </ul>
-                ) : (
-                  <p className="pending">Especificações pendentes de confirmação.</p>
-                )}
+                ) : product.id === 'transferencia' ? (
+                  <p className="pending">Fotos e especificações em breve.</p>
+                ) : null}
                 <a
                   className="btn btn--primary btn--lg"
                   href={whatsappUrl(product.name)}

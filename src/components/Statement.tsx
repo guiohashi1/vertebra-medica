@@ -5,18 +5,19 @@ import { usePerf } from './PerfProvider'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const text =
-  'Mais do que leitos hospitalares, entregamos noites seguras, dores aliviadas e a certeza de que seu ente querido está nas melhores mãos.'
+const lineMain =
+  'Mais que equipamentos: noites seguras e conforto para o paciente.'
+const lineSub = 'Alívio e acolhimento pra quem cuida com amor.'
 
-const highlight = new Set(['seguras,', 'aliviadas', 'mãos.'])
+const highlightMain = new Set(['seguras', 'conforto'])
+const highlightSub = new Set(['Alívio', 'acolhimento', 'amor.'])
 
 export function Statement() {
   const mode = usePerf()
-  const textRef = useRef<HTMLParagraphElement>(null)
+  const textRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const el = textRef.current
-    // Só desliga em static / reduced-motion. Em lite o reveal continua.
     if (!el || mode === 'static') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
@@ -49,18 +50,31 @@ export function Statement() {
   }, [mode])
 
   return (
-    <section className="statement" aria-label="O catálogo">
-      <div className="statement__inner">
+    <section className="statement" aria-label="Para quem cuida">
+      <div className="statement__inner" ref={textRef}>
         <p className="kicker kicker--center">Para quem cuida</p>
-        <p className="statement__text" ref={textRef}>
-          {text.split(' ').map((word, index) => (
+        <p className="statement__text statement__text--main">
+          {lineMain.split(' ').map((word, index) => (
             <span
-              key={`${word}-${index}`}
-              className={`word${highlight.has(word) ? ' word--accent' : ''}`}
+              key={`m-${word}-${index}`}
+              className={`word${highlightMain.has(word) ? ' word--accent' : ''}`}
             >
               {word}{' '}
             </span>
           ))}
+        </p>
+        <p className="statement__text statement__text--sub">
+          {lineSub.split(' ').map((word, index) => (
+            <span
+              key={`s-${word}-${index}`}
+              className={`word${highlightSub.has(word) ? ' word--accent' : ''}`}
+            >
+              {word}{' '}
+            </span>
+          ))}
+        </p>
+        <p className="kicker kicker--center statement__footer-kicker">
+          Pra quem precisa
         </p>
       </div>
     </section>

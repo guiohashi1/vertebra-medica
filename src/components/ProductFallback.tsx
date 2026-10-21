@@ -7,6 +7,7 @@ const labels: Record<ProductId, string> = {
   colchao: 'Colchão',
   poltrona: 'Poltrona',
   cadeira: 'Cadeira de rodas',
+  transferencia: 'Cadeira de transferência',
 }
 
 type ProductFallbackProps = {

@@ -18,8 +18,13 @@ export function Nav() {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setOpen(false)
     }
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
+    }
   }, [open])
 
   function close() {

@@ -126,7 +126,28 @@ export const productPhotos: Partial<Record<ProductId, ProductPhoto[]>> = {
       alt: 'Cadeira de rodas padrão, vista traseira',
     },
   ],
-  // Fotos da cadeira de transferência: aguardando envio do cliente.
+  transferencia: [
+    {
+      src: '/produtos/transferencia/studio/01-geral.jpg',
+      alt: 'Cadeira de transferência com elevação eletrônica, vista geral',
+    },
+    {
+      src: '/produtos/transferencia/studio/02-lateral.jpg',
+      alt: 'Cadeira de transferência com elevação eletrônica, vista lateral',
+    },
+    {
+      src: '/produtos/transferencia/studio/03-assento.jpg',
+      alt: 'Cadeira de transferência, assento bipartido com abertura para higiene',
+    },
+    {
+      src: '/produtos/transferencia/studio/04-mecanismo.jpg',
+      alt: 'Cadeira de transferência, vista do mecanismo e encosto bipartido',
+    },
+    {
+      src: '/produtos/transferencia/studio/05-aberta.jpg',
+      alt: 'Cadeira de transferência com assento aberto para posicionar o paciente',
+    },
+  ],
 }
 
 export const products: {
@@ -145,7 +166,7 @@ export const products: {
     points: [
       'Altura: sob consulta',
       'Largura: sob consulta',
-      'Suporta até 120 kg',
+      'Capacidade: até 120 kg',
     ],
   },
   {
@@ -157,7 +178,7 @@ export const products: {
     points: [
       'Altura: sob consulta',
       'Largura: sob consulta',
-      'Suporta até 120 kg',
+      'Capacidade: até 120 kg',
     ],
   },
   {
@@ -181,22 +202,30 @@ export const products: {
     tag: 'Manual',
     description: 'Cadeira de rodas padrão para mobilidade.',
     points: [
-      'Construída em aço carbono',
-      'Estrutura dobrável em X',
-      'Encosto e assento em nylon',
-      'Pneus maciços',
-      'Capacidade para 90 kg',
-      'Largura do assento 40 cm e largura total 64 cm',
+      'Estrutura: aço carbono, dobrável em X',
+      'Assento: nylon',
+      'Pneus: maciços',
+      'Capacidade: 90 kg',
+      'Largura assento: 40 cm',
+      'Largura total: 64 cm',
       'Marca: Jaguaribe',
     ],
   },
   {
     id: 'transferencia',
     name: 'Cadeira de transferência',
-    tag: 'Transferência',
+    tag: 'Elevação eletrônica',
     description:
-      'Cadeira de transferência. Medidas e condições são informados no orçamento.',
-    points: [],
+      'Multiuso 5 em 1 (transferência, transporte, higiene, banho e sobre vaso), com elevação eletrônica para menos esforço de quem cuida.',
+    points: [
+      'Capacidade: até 135 kg',
+      'Dimensões: 77 × 54 cm',
+      'Altura cadeira: 99–132 cm',
+      'Altura assento: 40–73 cm',
+      'Peso: 26 kg',
+      'Bateria: lítio',
+      'Proteção: IP44',
+    ],
   },
 ]
 

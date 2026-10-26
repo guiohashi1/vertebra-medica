@@ -15,7 +15,7 @@ export const brand = {
 export const pageLinks = [
   { href: '#catalogo', label: 'Modelos' },
   { href: '#comparativo', label: 'Elétrica ou manual' },
-  { href: '#orcamento', label: 'Orçamento' },
+  { href: '#orcamento', label: 'Consultar' },
 ] as const
 
 export type ProductId =
@@ -129,23 +129,23 @@ export const productPhotos: Partial<Record<ProductId, ProductPhoto[]>> = {
   transferencia: [
     {
       src: '/produtos/transferencia/studio/01-geral.jpg',
-      alt: 'Cadeira de transferência com elevação eletrônica, vista geral',
+      alt: 'Cadeira de transferência com elevação eletrônica em quarto hospitalar, vista geral',
     },
     {
       src: '/produtos/transferencia/studio/02-lateral.jpg',
-      alt: 'Cadeira de transferência com elevação eletrônica, vista lateral',
+      alt: 'Cadeira de transferência com elevação eletrônica em ambiente hospitalar, vista lateral',
     },
     {
       src: '/produtos/transferencia/studio/03-assento.jpg',
-      alt: 'Cadeira de transferência, assento bipartido com abertura para higiene',
+      alt: 'Cadeira de transferência em quarto hospitalar, assento bipartido com abertura para higiene',
     },
     {
       src: '/produtos/transferencia/studio/04-mecanismo.jpg',
-      alt: 'Cadeira de transferência, vista do mecanismo e encosto bipartido',
+      alt: 'Cadeira de transferência em ambiente hospitalar, vista do mecanismo e encosto bipartido',
     },
     {
       src: '/produtos/transferencia/studio/05-aberta.jpg',
-      alt: 'Cadeira de transferência com assento aberto para posicionar o paciente',
+      alt: 'Cadeira de transferência em ambiente hospitalar, assento aberto para posicionar o paciente',
     },
   ],
 }
@@ -234,6 +234,10 @@ export const products: {
  */
 export const companyFacts: { label: string; text: string }[] = [
   {
+    label: 'Aluguel e venda',
+    text: 'Atendemos aluguel e compra de equipamentos hospitalares. Condições, prazos e disponibilidade entram no orçamento pelo WhatsApp.',
+  },
+  {
     label: 'Região atendida',
     text: 'Recife e região metropolitana. Outras localidades sob consulta.',
   },
@@ -247,7 +251,7 @@ export const companyFacts: { label: string; text: string }[] = [
   },
   {
     label: 'Dados empresariais',
-    text: 'A Oficina das Camas é uma empresa do ramo de aluguel e venda de equipamentos hospitalares para aplicação em diversos ambientes: hospitais, clínicas e home care. Trabalhamos com equipamentos novos e recuperados, entregando sempre equipamentos de qualidade comprovada.',
+    text: 'A Oficina das Camas atua com aluguel e venda de equipamentos hospitalares para hospitais, clínicas e home care. Trabalhamos com equipamentos novos e recuperados, sempre com qualidade comprovada.',
   },
 ]
 
@@ -349,7 +353,11 @@ export const BRAZIL_UFS = [
   'TO',
 ] as const
 
+export const quoteIntents = ['Aluguel', 'Compra', 'Aluguel ou compra'] as const
+export type QuoteIntent = (typeof quoteIntents)[number]
+
 export type QuotePayload = {
+  intent?: QuoteIntent
   product?: string
   quantity?: string
   city?: string
@@ -362,12 +370,13 @@ export function whatsappUrl(payload?: string | QuotePayload) {
 
 export function whatsappText(payload?: string | QuotePayload) {
   let text =
-    'Olá. Quero solicitar um orçamento de equipamentos hospitalares.'
+    'Olá. Quero solicitar um orçamento de aluguel ou compra de equipamentos hospitalares.'
 
   if (typeof payload === 'string') {
-    text = `Olá. Quero solicitar um orçamento.\n\nProduto: ${payload}`
+    text = `Olá. Quero solicitar um orçamento (aluguel ou compra).\n\nProduto: ${payload}`
   } else if (payload) {
     const lines = ['Olá. Quero solicitar um orçamento.', '']
+    if (payload.intent) lines.push(`Interesse: ${payload.intent}`)
     if (payload.product) lines.push(`Produto: ${payload.product}`)
     if (payload.quantity) lines.push(`Quantidade: ${payload.quantity}`)
     const place = [payload.city, payload.uf].filter(Boolean).join('/')

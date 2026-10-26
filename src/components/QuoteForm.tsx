@@ -3,14 +3,17 @@ import { Reveal } from './Reveal'
 import {
   BRAZIL_UFS,
   products,
+  quoteIntents,
   whatsappText,
   whatsappUrl,
+  type QuoteIntent,
   type QuotePayload,
 } from '../config'
 
 const quantities = ['1', '2', '3+']
 
 export function QuoteForm() {
+  const [intent, setIntent] = useState<QuoteIntent>('Aluguel')
   const [product, setProduct] = useState(products[0]?.name ?? '')
   const [quantity, setQuantity] = useState('1')
   const [city, setCity] = useState('')
@@ -18,12 +21,13 @@ export function QuoteForm() {
 
   const payload = useMemo<QuotePayload>(
     () => ({
+      intent,
       product: product || undefined,
       quantity: quantity || undefined,
       city: city.trim() || undefined,
       uf: uf || undefined,
     }),
-    [product, quantity, city, uf],
+    [intent, product, quantity, city, uf],
   )
   const href = whatsappUrl(payload)
   const preview = whatsappText(payload)
@@ -38,13 +42,12 @@ export function QuoteForm() {
       <div className="cta__layout shell">
         <div className="cta__intro">
           <Reveal>
-            <h2 className="cta__title">Solicitar orçamento</h2>
+            <h2 className="cta__title">Aluguel ou compra</h2>
           </Reveal>
           <Reveal delay={1}>
             <p className="cta__text">
-              Informe produto, quantidade e cidade. O botão abre o WhatsApp com
-              o texto pronto. A solicitação só é enviada quando você confirmar
-              o envio dentro do WhatsApp.
+              Escolha o interesse, o produto e a cidade. O botão abre o WhatsApp
+              com o texto pronto.
             </p>
           </Reveal>
           <Reveal delay={2}>
@@ -58,6 +61,23 @@ export function QuoteForm() {
 
         <Reveal delay={2}>
           <form className="quote" onSubmit={onSubmit}>
+            <fieldset className="quote__field">
+              <legend className="quote__label">Interesse</legend>
+              <div className="quote__pills" role="group" aria-label="Interesse">
+                {quoteIntents.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    className={`quote__pill${intent === item ? ' is-active' : ''}`}
+                    onClick={() => setIntent(item)}
+                    aria-pressed={intent === item}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
             <label className="quote__field">
               <span className="quote__label">Produto</span>
               <select

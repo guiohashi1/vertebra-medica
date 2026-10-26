@@ -24,7 +24,7 @@ export function WhatsAppFloat() {
         tabIndex={visible ? undefined : -1}
         aria-hidden={visible ? undefined : true}
       >
-        Pedir orçamento no WhatsApp
+        Consultar no WhatsApp
       </a>
     </div>
   )

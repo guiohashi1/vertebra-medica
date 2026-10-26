@@ -65,7 +65,7 @@ export function Nav() {
             rel="noopener noreferrer"
             onClick={close}
           >
-            Pedir orçamento
+            Aluguel ou compra
           </a>
         </nav>
       </div>

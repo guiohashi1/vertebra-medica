@@ -178,7 +178,7 @@ export function Catalog() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Pedir orçamento deste modelo
+                    Consultar aluguel ou compra
                   </a>
 
                   {specs.length > 0 ? (

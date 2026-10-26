@@ -11,7 +11,7 @@ export function Footer() {
             Oficina das <span>{brand.accent}</span>
           </a>
           <p className="footer__line">
-            Equipamentos para home care, clínicas e hospitais.
+            Aluguel e venda de equipamentos para home care, clínicas e hospitais.
           </p>
         </div>
 
@@ -22,7 +22,7 @@ export function Footer() {
             </a>
           ))}
           <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
-            Pedir orçamento
+            Aluguel ou compra
           </a>
         </nav>
       </div>

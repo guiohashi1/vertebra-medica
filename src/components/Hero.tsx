@@ -20,9 +20,9 @@ export function Hero() {
             <em>Clínicas e Hospitais</em>
           </h1>
           <p className="hero__lead intro intro--4">
-            Camas hospitalares manuais e elétricas, Cadeiras de Rodas, colchões
-            pneumáticos, cadeiras de transferência, etc. Cotação rápida pelo
-            WhatsApp.
+            Aluguel e venda de camas hospitalares, cadeiras de rodas, colchões
+            pneumáticos, cadeiras de transferência e outros equipamentos.
+            Cotação rápida pelo WhatsApp.
           </p>
           <div className="hero__actions intro intro--5">
             <a
@@ -31,7 +31,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Pedir orçamento no WhatsApp
+              Consultar aluguel ou compra
             </a>
             <a className="btn btn--ghost btn--lg" href="#catalogo">
               Ver modelos disponíveis

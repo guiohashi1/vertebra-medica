@@ -57,7 +57,7 @@ export function Compare() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Pedir orçamento da cama manual
+                    Consultar manual
                   </a>
                 ) : null}
               </div>
@@ -69,7 +69,7 @@ export function Compare() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Pedir orçamento da cama elétrica
+                    Consultar elétrica
                   </a>
                 ) : null}
               </div>

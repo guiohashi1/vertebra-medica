@@ -25,6 +25,7 @@ function splitPoint(point: string): { label: string; value: string } | null {
 export function Catalog() {
   const [active, setActive] = useState<ProductId>(products[0]!.id)
   const sectionRef = useRef<HTMLElement>(null)
+  const stageRef = useRef<HTMLElement | null>(null)
   const tabRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
   useEffect(() => {
@@ -59,27 +60,46 @@ export function Catalog() {
   }, [])
 
   useEffect(() => {
-    // Só move a aba ativa se o catálogo já estiver na tela.
-    // No load inicial isso evitava pular o scroll pro meio da página no mobile.
+    // Só alinha a aba ativa na faixa horizontal — sem mexer no scroll da página.
     const tab = tabRefs.current[active]
     const section = sectionRef.current
-    if (!tab || !section) return
+    const scroller = tab?.closest('.tabs') as HTMLElement | null
+    if (!tab || !section || !scroller) return
     const rect = section.getBoundingClientRect()
     const inView = rect.top < window.innerHeight && rect.bottom > 0
     if (!inView) return
+
+    const mobile = window.matchMedia('(max-width: 960px)').matches
+    if (mobile) {
+      // Alinha o ativo à esquerda e deixa o próximo chip aparecer à direita.
+      const left = Math.max(0, tab.offsetLeft - 10)
+      scroller.scrollTo({ left, behavior: 'smooth' })
+      return
+    }
+
     tab.scrollIntoView({ block: 'nearest', inline: 'nearest' })
   }, [active])
 
-  function selectProduct(id: ProductId, opts?: { revealPanel?: boolean }) {
+  function selectProduct(id: ProductId, opts?: { revealStage?: boolean }) {
     setActive(id)
     history.replaceState(null, '', `${HASH_PREFIX}${id}`)
-    if (!opts?.revealPanel) return
+    if (!opts?.revealStage) return
     if (!window.matchMedia('(max-width: 960px)').matches) return
     requestAnimationFrame(() => {
-      document.getElementById(`painel-${id}`)?.scrollIntoView({
-        block: 'nearest',
-        behavior: 'smooth',
-      })
+      const stage = stageRef.current
+      if (!stage) return
+      const header = document.querySelector('.nav')
+      const chips = document.querySelector('.model-nav')
+      const offset =
+        (header?.getBoundingClientRect().height ?? 0) +
+        (chips?.getBoundingClientRect().height ?? 0) +
+        10
+      // Enquadra a foto abaixo dos chips sticky; a descrição fica logo em seguida.
+      const top = Math.max(
+        0,
+        stage.getBoundingClientRect().top + window.scrollY - offset,
+      )
+      window.scrollTo({ top, behavior: 'smooth' })
     })
   }
 
@@ -93,7 +113,7 @@ export function Catalog() {
     if (next < 0) return
     event.preventDefault()
     const id = products[next]!.id
-    selectProduct(id, { revealPanel: true })
+    selectProduct(id, { revealStage: true })
     tabRefs.current[id]?.focus()
   }
 
@@ -114,8 +134,48 @@ export function Catalog() {
         </Reveal>
 
         <div className="showroom">
+          <div className="model-nav">
+            <div className="model-nav__head">
+              <p className="model-nav__label">Modelos</p>
+              <p className="model-nav__hint">Deslize para ver todos · {products.length}</p>
+            </div>
+            <div className="tabs" role="tablist" aria-label="Modelos">
+              {products.map((product, index) => {
+                const selected = product.id === active
+                return (
+                  <button
+                    key={product.id}
+                    ref={(el) => {
+                      tabRefs.current[product.id] = el
+                    }}
+                    type="button"
+                    role="tab"
+                    id={`tab-${product.id}`}
+                    aria-selected={selected}
+                    aria-controls={`painel-${product.id}`}
+                    tabIndex={selected ? 0 : -1}
+                    className={`tab${selected ? ' is-active' : ''}`}
+                    onClick={() => selectProduct(product.id, { revealStage: true })}
+                    onKeyDown={(event) => onTabKey(event, index)}
+                  >
+                    <span className="tab__index" aria-hidden="true">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="tab__name">{product.name}</span>
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
           <Reveal className="showroom__stage-wrap">
-            <figure className="showroom__stage has-photo">
+            <figure
+              className="showroom__stage has-photo"
+              ref={(el) => {
+                stageRef.current = el
+              }}
+              id="showroom-stage"
+            >
               {hasPhotos ? (
                 <PhotoCarousel
                   key={active}
@@ -129,37 +189,6 @@ export function Catalog() {
           </Reveal>
 
           <div className="showroom__panel">
-            <div className="model-nav">
-              <p className="model-nav__label">Modelos</p>
-              <div className="tabs" role="tablist" aria-label="Modelos">
-                {products.map((product, index) => {
-                  const selected = product.id === active
-                  return (
-                    <button
-                      key={product.id}
-                      ref={(el) => {
-                        tabRefs.current[product.id] = el
-                      }}
-                      type="button"
-                      role="tab"
-                      id={`tab-${product.id}`}
-                      aria-selected={selected}
-                      aria-controls={`painel-${product.id}`}
-                      tabIndex={selected ? 0 : -1}
-                      className={`tab${selected ? ' is-active' : ''}`}
-                      onClick={() => selectProduct(product.id, { revealPanel: true })}
-                      onKeyDown={(event) => onTabKey(event, index)}
-                    >
-                      <span className="tab__index" aria-hidden="true">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <span className="tab__name">{product.name}</span>
-                    </button>
-                  )
-                })}
-              </div>
-            </div>
-
             {products.map((product) => {
               const specs = product.points
                 .map((point) => ({ point, parts: splitPoint(point) }))

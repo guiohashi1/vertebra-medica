@@ -132,39 +132,27 @@ export function PhotoCarousel({
           fetchPriority={priority ? 'high' : 'auto'}
           draggable={false}
         />
-        {total > 1 ? (
-          <>
-            <button
-              type="button"
-              className="carousel__nav carousel__nav--prev"
-              onPointerDown={(event) => event.stopPropagation()}
-              onClick={() => go(-1)}
-              aria-label="Foto anterior"
-            >
-              <Chevron dir="prev" />
-            </button>
-            <button
-              type="button"
-              className="carousel__nav carousel__nav--next"
-              onPointerDown={(event) => event.stopPropagation()}
-              onClick={() => go(1)}
-              aria-label="Próxima foto"
-            >
-              <Chevron dir="next" />
-            </button>
-          </>
-        ) : null}
       </div>
 
       {total > 1 ? (
-        <div className="carousel__meta">
+        <div className="carousel__toolbar">
+          <button
+            type="button"
+            className="carousel__nav carousel__nav--prev"
+            onClick={() => go(-1)}
+            aria-label="Foto anterior"
+          >
+            <Chevron dir="prev" />
+          </button>
+
           <p className="carousel__count" aria-live="polite">
-            {index + 1}
-            <span aria-hidden="true"> / </span>
+            <span className="carousel__count-current">{index + 1}</span>
+            <span aria-hidden="true">/</span>
             <span className="sr-only"> de </span>
             {total}
           </p>
-          <div className="carousel__dots" role="tablist" aria-label="Fotos do modelo">
+
+          <div className="carousel__track" role="tablist" aria-label="Fotos do modelo">
             {photos.map((photo, i) => (
               <button
                 key={photo.src}
@@ -172,11 +160,20 @@ export function PhotoCarousel({
                 role="tab"
                 aria-selected={i === index}
                 aria-label={`Foto ${i + 1} de ${total}`}
-                className={`carousel__dot${i === index ? ' is-active' : ''}`}
+                className={`carousel__segment${i === index ? ' is-active' : ''}`}
                 onClick={() => setIndex(i)}
               />
             ))}
           </div>
+
+          <button
+            type="button"
+            className="carousel__nav carousel__nav--next"
+            onClick={() => go(1)}
+            aria-label="Próxima foto"
+          >
+            <Chevron dir="next" />
+          </button>
         </div>
       ) : null}
     </div>

@@ -61,7 +61,13 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
     }
 
     document.addEventListener('click', onClick)
-    if (window.location.hash.length > 1) scrollToId(window.location.hash.slice(1))
+
+    const hash = window.location.hash.slice(1)
+    if (hash && document.getElementById(hash)) {
+      scrollToId(hash)
+    } else if (!hash) {
+      window.scrollTo(0, 0)
+    }
 
     return () => document.removeEventListener('click', onClick)
   }, [mode])

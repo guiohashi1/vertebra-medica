@@ -59,7 +59,15 @@ export function Catalog() {
   }, [])
 
   useEffect(() => {
-    tabRefs.current[active]?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+    // Só move a aba ativa se o catálogo já estiver na tela.
+    // No load inicial isso evitava pular o scroll pro meio da página no mobile.
+    const tab = tabRefs.current[active]
+    const section = sectionRef.current
+    if (!tab || !section) return
+    const rect = section.getBoundingClientRect()
+    const inView = rect.top < window.innerHeight && rect.bottom > 0
+    if (!inView) return
+    tab.scrollIntoView({ block: 'nearest', inline: 'nearest' })
   }, [active])
 
   function selectProduct(id: ProductId, opts?: { revealPanel?: boolean }) {

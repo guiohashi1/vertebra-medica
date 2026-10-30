@@ -15,9 +15,8 @@ export function Hero() {
       <div className="hero__layout shell">
         <div className="hero__content">
           <h1 className="hero__brand hero__brand--compact intro intro--2">
-            Equipamentos para Home Care,
-            <br />
-            <em>Clínicas e Hospitais</em>
+            <span className="hero__line">Equipamentos para cuidado em casa</span>
+            <em className="hero__line">(Home Care), clínicas e hospitais.</em>
           </h1>
           <p className="hero__lead intro intro--4">
             Aluguel e venda de camas hospitalares, cadeiras de rodas, colchões

@@ -414,7 +414,7 @@ html[data-perf='lite'] .intro {
 }
 
 .hero__content {
-  max-width: 36rem;
+  max-width: 40rem;
 }
 
 .hero__brand {
@@ -427,19 +427,27 @@ html[data-perf='lite'] .intro {
 }
 
 .hero__brand--compact {
-  font-size: clamp(1.9rem, 4vw, 3.1rem);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(1.55rem, 2.7vw, 2.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.028em;
 }
 
 .hero__line {
   display: block;
 }
 
+.hero__brand--compact .hero__line {
+  text-wrap: balance;
+}
+
 .hero__brand em {
   font-style: italic;
   font-weight: 400;
   color: var(--accent);
+}
+
+.hero__brand--compact em.hero__line {
+  margin-top: 0.06em;
 }
 
 .hero__lead {
@@ -1631,7 +1639,7 @@ html[data-perf='lite'] .reveal {
   }
 
   .hero__brand--compact {
-    font-size: clamp(1.6rem, 7vw, 2.15rem);
+    font-size: clamp(1.5rem, 6.2vw, 1.95rem);
   }
 
   .hero__lead {

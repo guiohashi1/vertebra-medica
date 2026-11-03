@@ -4,6 +4,23 @@ import { comparison, products, whatsappUrl } from '../config'
 const eletrica = products.find((product) => product.id === 'eletrica')
 const manual = products.find((product) => product.id === 'manual')
 
+const columns = [
+  {
+    key: 'manual' as const,
+    title: 'Manual',
+    product: manual,
+    cta: 'Consultar manual',
+    getValue: (row: (typeof comparison.rows)[number]) => row.manual,
+  },
+  {
+    key: 'eletrica' as const,
+    title: 'Elétrica',
+    product: eletrica,
+    cta: 'Consultar elétrica',
+    getValue: (row: (typeof comparison.rows)[number]) => row.eletrica,
+  },
+]
+
 export function Compare() {
   return (
     <section className="compare" id="comparativo" aria-labelledby="compare-title">
@@ -11,7 +28,7 @@ export function Compare() {
         <Reveal>
           <div className="section-head">
             <p className="kicker">Comparativo</p>
-            <h2 id="compare-title" className="sr-only">
+            <h2 id="compare-title" className="section-title compare__title">
               {comparison.title}
             </h2>
           </div>
@@ -19,61 +36,37 @@ export function Compare() {
 
         <Reveal delay={1}>
           <div className="versus">
-            <div className="versus__head">
-              <div className="versus__corner" aria-hidden="true" />
-              <h3 className="versus__title">
-                <span className="versus__title-kicker">Cama hospitalar</span>
-                Manual
-              </h3>
-              <h3 className="versus__title versus__manual">
-                <span className="versus__title-kicker">Cama hospitalar</span>
-                Elétrica
-              </h3>
-            </div>
+            {columns.map((column) => (
+              <article
+                key={column.key}
+                className={`versus__card versus__card--${column.key}`}
+              >
+                <header className="versus__card-head">
+                  <p className="versus__title-kicker">Cama hospitalar</p>
+                  <h3 className="versus__card-title">{column.title}</h3>
+                </header>
 
-            <dl className="versus__rows">
-              {comparison.rows.map((row) => (
-                <div className="versus__row" key={row.label}>
-                  <dt className="versus__name">{row.label}</dt>
-                  <dd className="versus__cell">
-                    <span className="sr-only">Manual. </span>
-                    {row.manual}
-                  </dd>
-                  <dd className="versus__cell versus__manual">
-                    <span className="sr-only">Elétrica. </span>
-                    {row.eletrica}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+                <dl className="versus__list">
+                  {comparison.rows.map((row) => (
+                    <div className="versus__item" key={row.label}>
+                      <dt className="versus__item-label">{row.label}</dt>
+                      <dd className="versus__item-value">{column.getValue(row)}</dd>
+                    </div>
+                  ))}
+                </dl>
 
-            <div className="versus__links">
-              <div className="versus__corner" aria-hidden="true" />
-              <div className="versus__link">
-                {manual ? (
+                {column.product ? (
                   <a
-                    className="text-link"
-                    href={whatsappUrl(manual.name)}
+                    className="btn btn--ghost versus__cta"
+                    href={whatsappUrl(column.product.name)}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Consultar manual
+                    {column.cta}
                   </a>
                 ) : null}
-              </div>
-              <div className="versus__link versus__manual">
-                {eletrica ? (
-                  <a
-                    className="text-link"
-                    href={whatsappUrl(eletrica.name)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Consultar elétrica
-                  </a>
-                ) : null}
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
         </Reveal>
 

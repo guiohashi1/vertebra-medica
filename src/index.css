@@ -1109,10 +1109,7 @@ html[data-perf='static'] .panel {
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.025em;
-}
-
-.versus__card--eletrica .versus__card-title {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .versus__list {
